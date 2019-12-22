@@ -3,3 +3,7 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  form(method='POST' action='/')
+    div.form-group
+    label(for='action') Action:
+    input#name.form-control(type='text', placeholder='What do you want to do?' name='action')

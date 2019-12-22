@@ -8,3 +8,12 @@ body {
 a {
   color: #00B7FF;
 }
+
+input {
+  background-color:inherit;
+  color: inherit;
+  font-size: x-large;
+  width: 500px;
+  border: 0px;
+  border-bottom: 2px;
+}
