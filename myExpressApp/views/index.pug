@@ -1,9 +1,17 @@
 extends layout
 
 block content
+  script(src='/javascripts/story.js')
   h1= title
   p Welcome to #{title}
+  //- script document.write(intro1);
+  //- script document.write(link);
+  p(id="story")
+  p(id="link") 
   form(method='POST' action='/')
     div.form-group
-    label(for='action') Action:
-    input#name.form-control(type='text', placeholder='What do you want to do?' name='action')
+    //- label(for='action') Action:
+    input#name.form-control(type='text', placeholder='What do you want to do?' name='action' autofocus)
+
+    script document.getElementById("story").innerHTML = intro1.story;
+    script 
