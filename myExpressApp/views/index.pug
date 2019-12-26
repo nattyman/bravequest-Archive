@@ -3,13 +3,14 @@ extends layout
 block content
   script(src='/javascripts/story.js')
   script(src='/javascripts/location.js')
+  script(src='/javascripts/map.js')
   h1= title
   p Welcome to #{title}
   //- script document.write(intro1);
   //- script document.write(link);
   p(id="story") Where would you like to go?
   p(id="locationMessage") My location is currently 
-    span(id="myLocation") 
+    span(id="myCoordinates ") 
   form(onSubmit="return enterCommand()" method="post")
     div.form-group
     //- label(for='action') Action:
@@ -20,10 +21,12 @@ block content
   script. 
     //- Print location
     function printLocation() {
-      document.getElementById("myLocation").innerHTML = "x:" + myLocation.x + " y:" + myLocation.y ;
+      document.getElementById("myCoordinates ").innerHTML = "x:" + myCoordinates .x + " y:" + myCoordinates .y ;
     }
     printLocation();
     var alert = "";
+    myMap = map;
+    console.log(myMap.x[1].y[1].name);
 
     //- function to receive input and print it on the page
     function enterCommand() {
@@ -34,11 +37,15 @@ block content
       let newCommand = document.getElementById("command").value;
       //-
       move(newCommand);
+      setLocation();
       printLocation();
       if (alert) {
         newCommand += "<br><span style='color:red; font:bold'>" + alert + "</span>";
       }
               console.log(alert);
+
+    //- Test JSON retrieval
+    //- var myMap = JSON.parse(map);
 
       //- Print the command on the page for debuging
       document.getElementById("story").innerHTML = newCommand; 
