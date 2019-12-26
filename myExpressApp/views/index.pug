@@ -2,12 +2,14 @@ extends layout
 
 block content
   script(src='/javascripts/story.js')
+  script(src='/javascripts/location.js')
   h1= title
   p Welcome to #{title}
   //- script document.write(intro1);
   //- script document.write(link);
   p(id="story") Where would you like to go?
-  p(id="link") 
+  p(id="locationMessage") My location is currently 
+    span(id="myLocation") 
   form(onSubmit="return enterCommand()" method="post")
     div.form-group
     //- label(for='action') Action:
@@ -16,10 +18,34 @@ block content
     //- script document.getElementById("story").innerHTML = intro1.story;
   //- script var newCommand = document.getElementByID("command").onsubmit = funciton {enterCommand()}
   script. 
-    function enterCommand() { 
-    event.preventDefault(); 
-    var newCommand = document.getElementById("command").value; 
-    document.getElementById("story").innerHTML = newCommand; }
+    //- Print location
+    function printLocation() {
+      document.getElementById("myLocation").innerHTML = "x:" + myLocation.x + " y:" + myLocation.y ;
+    }
+    printLocation();
+    var alert = "";
+
+    //- function to receive input and print it on the page
+    function enterCommand() {
+      //- Prevent the form from reloading the page 
+      event.preventDefault(); 
+
+      //- Recieve the input into "newCommand"
+      let newCommand = document.getElementById("command").value;
+      //-
+      move(newCommand);
+      printLocation();
+      if (alert) {
+        newCommand += "<br><span style='color:red; font:bold'>" + alert + "</span>";
+      }
+              console.log(alert);
+
+      //- Print the command on the page for debuging
+      document.getElementById("story").innerHTML = newCommand; 
+      //- Reset alert to nothing
+      alert = "";
+      }
+
 
 //- <script>
 //- document.getElementById("myForm").onsubmit = function() {myFunction()};
