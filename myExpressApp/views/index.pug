@@ -6,12 +6,25 @@ block content
   p Welcome to #{title}
   //- script document.write(intro1);
   //- script document.write(link);
-  p(id="story")
+  p(id="story") Where would you like to go?
   p(id="link") 
-  form(method='POST' action='/')
+  form(onSubmit="return enterCommand()" method="post")
     div.form-group
     //- label(for='action') Action:
-    input#name.form-control(type='text', placeholder='What do you want to do?' name='action' autofocus)
+    input#command.form-control(type='text', placeholder='What do you want to do?' name='action' autofocus)
 
-    script document.getElementById("story").innerHTML = intro1.story;
-    script 
+    //- script document.getElementById("story").innerHTML = intro1.story;
+  //- script var newCommand = document.getElementByID("command").onsubmit = funciton {enterCommand()}
+  script. 
+    function enterCommand() { 
+    event.preventDefault(); 
+    var newCommand = document.getElementById("command").value; 
+    document.getElementById("story").innerHTML = newCommand; }
+
+//- <script>
+//- document.getElementById("myForm").onsubmit = function() {myFunction()};
+
+//- function myFunction() {
+//-   alert("The form was submitted");
+//- }
+//- </script>
