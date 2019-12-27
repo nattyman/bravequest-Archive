@@ -4,6 +4,8 @@ block content
   script(src='/javascripts/story.js')
   script(src='/javascripts/location.js')
   script(src='/javascripts/map.js')
+  script(src='/javascripts/game.js')
+  
   h1= title
   p Welcome to #{title}
   //- script document.write(intro1);
@@ -18,31 +20,7 @@ block content
 
     //- script document.getElementById("story").innerHTML = intro1.story;
   //- script var newCommand = document.getElementByID("command").onsubmit = funciton {enterCommand()}
-  script. 
-    //- Print location
-    function printLocation() {
-      document.getElementById("myCoordinates ").innerHTML = "x:" + myCoordinates .x + " y:" + myCoordinates .y ;
-    }
-    printLocation();
-    var alert = "";
-    myMap = map;
-    console.log(myMap.x[1].y[1].name);
-
-    //- function to receive input and print it on the page
-    function enterCommand() {
-      //- Prevent the form from reloading the page 
-      event.preventDefault(); 
-
-      //- Recieve the input into "newCommand"
-      let newCommand = document.getElementById("command").value;
-      //-
-      move(newCommand);
-      setLocation();
-      printLocation();
-      if (alert) {
-        newCommand += "<br><span style='color:red; font:bold'>" + alert + "</span>";
-      }
-              console.log(alert);
+  script runGame();
 
     //- Test JSON retrieval
     //- var myMap = JSON.parse(map);
