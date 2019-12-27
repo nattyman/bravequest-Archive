@@ -3,9 +3,10 @@
 // console.log(map.row);
 
 // Starting location
-var myCoordinates = {"x":1,"y":1};
+var myCoordinates = {"x":1,"y":3};
 var myLocation = "";
 
+// Move based on the users commands
 function move(direction){
     switch(direction) {
         case "North":
@@ -44,6 +45,7 @@ function move(direction){
     }
 }
 
+// Match the coordinates with the location on the map.
 function setLocation() {
     // Assign the current coordinates to myX and myY
     myX = myCoordinates.x;
@@ -53,4 +55,5 @@ function setLocation() {
     myLocation = myMap.x[myX].y[myY].name;
     console.log(myLocation);
 
+    encounter();
 }

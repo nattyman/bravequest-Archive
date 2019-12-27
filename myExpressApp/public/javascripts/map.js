@@ -8,25 +8,33 @@ var map = {
             "y":
             {
                 1:{
+                    "id":10101,
                     "name": "Kingsport",
                 },
                 2:{
-                    "name": "Forest"
+                    "id":10102,
+                    "name": "Road between Kingsport and the farm",
+                    "npc":"monster",
+                    "type":"wolf",
                 },
                 3:{
-                    "name": "Mountains"
+                    "id":10103,
+                    "name": "The farm"
                 }
             }
         },
         2:{ "y":
             {
                 1:{
+                    "id":10201,
                     "name": "Kingsport2"
                 },
                 2:{
+                    "id":10202,
                     "name": "Forest2"
                 },
                 3:{
+                    "id":10203,
                     "name": "Mountains2"
                 }
             }
@@ -34,13 +42,18 @@ var map = {
         3:{ "y":
             {
                 1:{
+                    "id":10301,
                     "name": "Kingsport3"
                 },
                 2:{
+                    "id":10302,
                     "name": "Forest3"
                 },
                 3:{
-                    "name": "Mountains3"
+                    "id":10303,
+                    "name": "Mountains3",
+                    // "monster":"Yeti",
+                    // "strength":2
                 }
             }
         }
