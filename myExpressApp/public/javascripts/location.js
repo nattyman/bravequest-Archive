@@ -10,15 +10,33 @@ function move(direction){
     switch(direction) {
         case "North":
             myCoordinates.y -= 1;
+            if (myCoordinates.y < map.min) {
+                alert="You can't go that direction!";
+                myCoordinates.y += 1;
+            } 
             break;
         case "East":
             myCoordinates.x += 1;
+            if (myCoordinates.x > map.max) {
+                alert="You can't go that direction!";
+                myCoordinates.x -= 1;
+            } 
+
             break;
         case "South":
             myCoordinates.y += 1;
+            if (myCoordinates.y > map.max) {
+                alert="You can't go that direction!";
+                myCoordinates.y -= 1;
+            } 
             break;
         case "West":
             myCoordinates.x -= 1;
+            if (myCoordinates.x < map.min) {
+                alert="You can't go that direction!";
+                myCoordinates.x += 1;
+            } 
+
             break;
         default:
             alert = "You can't move like that!";
@@ -27,9 +45,12 @@ function move(direction){
 }
 
 function setLocation() {
+    // Assign the current coordinates to myX and myY
     myX = myCoordinates.x;
     myY = myCoordinates.y;
     console.log("x=" + myX + "\ny=" + myY);
+    // Set the new location on the map.
     myLocation = myMap.x[myX].y[myY].name;
     console.log(myLocation);
+
 }
