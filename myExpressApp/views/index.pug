@@ -8,15 +8,16 @@ block content
   
   h1= title
   p Welcome to #{title}
-  //- script document.write(intro1);
+  //- script document.write(intro);
   //- script document.write(link);
-  p(id="story") Where would you like to go?
+  p(id="story") 
+    script document.write(intro);
   p(id="locationMessage") My location is currently 
     span(id="myCoordinates ") 
   form(onSubmit="return enterCommand()" method="post")
     div.form-group
     //- label(for='action') Action:
-    input#command.form-control(type='text', placeholder='What do you want to do?' name='action' autofocus)
+    input#command.form-control(type='text', placeholder='Where will you go?' name='action' autofocus autocomplete="off")
 
     //- script document.getElementById("story").innerHTML = intro1.story;
   //- script var newCommand = document.getElementByID("command").onsubmit = funciton {enterCommand()}

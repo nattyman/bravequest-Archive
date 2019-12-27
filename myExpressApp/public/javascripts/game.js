@@ -26,5 +26,8 @@ function enterCommand() {
   }
   console.log(alert);
   document.getElementById("story").innerHTML = newCommand; 
+  document.getElementById("command").value = "";
+  document.getElementById("command").placeholder = "Now what?"
+
 }
 

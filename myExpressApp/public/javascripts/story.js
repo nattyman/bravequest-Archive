@@ -1,13 +1,9 @@
-var intro1 = {
-    story:"William is a poor farmer. The kings daughter is kidnapped by the evil wizard Elixer and ransomed for the price of the entire kingdom.  The King puts out a reward for up-to half his kingdom and his daughters hand in marriage for whomever can defeat Elixer and return the princes safely.",
-    link:"intro2"
-};
+var intro = "<p>On returning home from hunting all day, you discover your home on fire, your parents dead in the snow, and your sister is missing.  Goblin tracks cover the ground disappering to the South."
 
-var intro2 = {
-    story: "William is a simple man and has no interest in reward or marrying a princes. After many brave Knights attempt to resque the princes but never return, it appears as if the king will have to hand over his good kingdom to the wicked wizard.  After returning from the market, William finds his home and farm completely destroyed  by the hand of Elixer's minions.",
-    link:"intro3"
-}
-var intro3 = {
-    story: "With nothing to lose and revenge in his heart, William takes his pitchfork and begins his brave quest to destroy the monster who took everything from him...",
-    link:"Begin"
-}
+intro += "<p>You have two rabbits, a loaf of bread, one skin of water, a hunting knife, and your short bow, with a dozen good arrows.  You could pursue them right away while you have the best chance of following their trail, but you only have enough food for a few days." 
+
+intro += "<p>The prudent measure would be to go North to Kingsport where you could alert the Kings Guard, get news, and purhcase more supplies.  You know they are probably taking her to Blacktooth Mountain hundreds of leagues to the Southeast, but you will lose 3 days going out of your way."
+
+intro += "<p>First you must bury your parents.  The ground is too frozen to dig, but you manage to gather enough rocks to bury them together in a cairn."
+
+intro += "<p>The time has come to decide, what path will you take?"

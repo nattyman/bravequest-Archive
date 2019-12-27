@@ -24,3 +24,8 @@ input:focus {
   border: 0px;
   outline: 0px;
 }
+input:-internal-autofill-selected {
+  background-color: inherit !important;
+  background-image: none !important;
+  color: inherit !important;
+}
