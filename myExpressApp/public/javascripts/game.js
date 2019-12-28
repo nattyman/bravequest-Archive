@@ -1,6 +1,14 @@
+var chance = "";
+
 function printLocation() {
     console.log("x:" + myCoordinates.x + " y:" + myCoordinates.y);
 }
+
+function rollDice(low, high) {
+    let diceRoll = Math.random() * (high - low) + low;
+    console.log("Dice roll = " + diceRoll);
+    return diceRoll;
+  }
 
 function runGame() {
     //- Print location
@@ -16,6 +24,9 @@ function runGame() {
 function enterCommand() {
     //- Prevent the form from reloading the page 
     event.preventDefault();
+
+    //Get a random number between 1 and 100
+    chance = rollDice(1,100);
 
     //- Recieve the input into "newCommand"
     let newCommand = document.getElementById("command").value;
@@ -48,8 +59,6 @@ function enterCommand() {
     // Print the new story message and question on the page
     document.getElementById("story").innerHTML = response.story;
     document.getElementById("question").innerHTML = response.question;
-
-
 
 }
 

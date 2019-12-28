@@ -27,8 +27,15 @@ function action(newCommand){
         case "knife":
         case "k":
             response.story = "A bold move!  Someone likes to get their hands dirty.  You slowly pull your knife out of it's sheath at your side and creep toward the yellow eyes staring out of the wood.<br><br>";
-            response.story += "Suddenly, without warning, another creature that is all fure and teeth and claws slams into you from the side. The eyes in front pounces on you along with half a dozen other fierce wolves.  You barely realize what is happening before they tear you to pieces.";
-            response.question = "Rest In Peace"
+            switch(true) {
+                case 50 < chance:
+                    response.story += "Suddenly, without warning, another creature that is all fure and teeth and claws slams into you from the side. The eyes in front pounces on you along with half a dozen other fierce wolves.  You barely realize what is happening before they tear you to pieces.";
+                    response.question = "Rest In Peace";
+                    break;
+                case 50 > chance:
+                    response.story += "The wolf lunges forward as you bury the knife in it's chest. Well done!";
+                    break;
+            }
             break;
         case "bow":
         case "b":
