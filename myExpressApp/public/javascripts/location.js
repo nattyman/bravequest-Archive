@@ -1,6 +1,5 @@
 // This module is to determin the player location and move them around the board.
 
-// console.log(map.row);
 
 // Starting location
 var myCoordinates = {"x":1,"y":3};
@@ -9,14 +8,16 @@ var myLocation = "";
 // Move based on the users commands
 function move(direction){
     switch(direction) {
-        case "North":
+        case "north":
+        case "n":
             myCoordinates.y -= 1;
             if (myCoordinates.y < map.min) {
                 alert="You can't go that direction!";
                 myCoordinates.y += 1;
             } 
             break;
-        case "East":
+        case "east":
+        case "e":
             myCoordinates.x += 1;
             if (myCoordinates.x > map.max) {
                 alert="You can't go that direction!";
@@ -24,20 +25,21 @@ function move(direction){
             } 
 
             break;
-        case "South":
+        case "south":
+        case "s":
             myCoordinates.y += 1;
             if (myCoordinates.y > map.max) {
                 alert="You can't go that direction!";
                 myCoordinates.y -= 1;
             } 
             break;
-        case "West":
+        case "west":
+        case "w":
             myCoordinates.x -= 1;
             if (myCoordinates.x < map.min) {
                 alert="You can't go that direction!";
                 myCoordinates.x += 1;
             } 
-
             break;
         default:
             alert = "You can't move like that!";
@@ -55,5 +57,4 @@ function setLocation() {
     myLocation = myMap.x[myX].y[myY].name;
     console.log(myLocation);
 
-    encounter();
 }

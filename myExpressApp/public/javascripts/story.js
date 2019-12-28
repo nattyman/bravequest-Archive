@@ -6,4 +6,4 @@ intro += "<p>The prudent measure would be to go North to Kingsport where you cou
 
 intro += "<p>First you must bury your parents.  The ground is too frozen to dig, but you manage to gather enough rocks to bury them together in a cairn."
 
-intro += "<p>The time has come to decide, what path will you take?"
+var question = "<p>The time has come to decide, what path will you take?"
