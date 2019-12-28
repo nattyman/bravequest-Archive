@@ -1,7 +1,8 @@
 
-function encounterMonster(type){
-    console.log("You are encountering a " + type);
-}
+// function encounterMonster(type){
+//     console.log("You are encountering a " + type);
+
+// }
 
 
 

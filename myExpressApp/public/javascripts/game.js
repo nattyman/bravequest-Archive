@@ -4,6 +4,8 @@ function printLocation() {
  
  function runGame() {
  //- Print location
+    document.getElementById("story").innerHTML = intro;
+
     printLocation();
     var alert = "";
     myMap = map;
@@ -18,16 +20,29 @@ function enterCommand() {
   let newCommand = document.getElementById("command").value;
   //-
   alert = "";
-  move(newCommand);
-  setLocation();
+  switch(state.mode) {
+    case "map":
+        move(newCommand);
+        setLocation();
+    case "encounter":
+        
+    default:
+        alert = "Error: No game state is available."
+  }
   printLocation();
   if (alert) {
     newCommand += "<br><span style='color:red; font:bold'>" + alert + "</span>";
   }
   console.log(alert);
-  document.getElementById("story").innerHTML = newCommand; 
   document.getElementById("command").value = "";
   document.getElementById("command").placeholder = "Now what?"
+
+//   Encounter
+    encounter();
+    document.getElementById("story").innerHTML = response.story;
+    document.getElementById("question").innerHTML = response.question;
+
+
 
 }
 

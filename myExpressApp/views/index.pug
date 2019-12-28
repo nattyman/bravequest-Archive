@@ -6,14 +6,15 @@ block content
   script(src='/javascripts/map.js')
   script(src='/javascripts/game.js')
   script(src='/javascripts/encounter.js')
-  script(src='/javascripts/monster.js')
-  
+  //- script(src='/javascripts/monster.js')
+  script(src='/javascripts/data.js')
+
   h1= title
-  p Welcome to #{title}
+  //- p Welcome to #{title}
   //- script document.write(intro);
   //- script document.write(link);
-  p(id="story") 
-    script document.write(intro);
+  div(id="story") 
+  div(id="question")
   p(id="locationMessage") My location is currently 
     span(id="myCoordinates ") 
   form(onSubmit="return enterCommand()" method="post")
