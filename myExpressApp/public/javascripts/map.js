@@ -16,6 +16,7 @@ var map = {
                     "name": "Road between Kingsport and the farm",
                     "npc":"monster",
                     "type":"wolf",
+                    "count":0,
                 },
                 3:{
                     "id":10103,

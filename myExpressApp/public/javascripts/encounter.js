@@ -6,9 +6,9 @@ var response = {"story":"No Story","Question":"No question"};
 
 // TO DO
 // *Create random number generator between 1 and 100 - DONE
-// *Create monster char stats
-// *Create main char stats
-// *Add random-ness to encounters
+// *Create monster char stats - DONE
+// *Create main char stats - DONE
+// *Add random-ness to encounters - DONE
 
 function action(newCommand){
     console.log("Ready to action = " + newCommand);
@@ -140,11 +140,12 @@ function battle(_opponent, _weapon){
 function battleChoice(command) {
     if (command == "fight" || command == "f") {
         battle(state.currentOpponent, state.currentWeapon);
-        // need to pass opponent and weapon, probably from embededed HTML fields?
     }
     else if (command == "run" || command == "r") {
         // Need to take damage from re-treating, probably subtract a full attack from the enemy.
-    
+        myStats.health - this[state.currentWeapon].attack;
+        response.story = "You barely manage to get away, but you lost " + this[state.currentWeapon].attack + " health, leaving you with only " + myStats.health + " health.";
+        response.question = "Where do you want to go now?"
         state.mode = "map";
     }
 }

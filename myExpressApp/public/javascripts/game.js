@@ -1,5 +1,5 @@
 var chance = "";
-var message = [];
+var message = " ";
 var story = "";
 
 function printLocation() {
@@ -86,6 +86,7 @@ function enterCommand() {
     document.getElementById("command").placeholder = "Now what?"
 
     // Print the new story message and question on the page
+    $("message").innerHTML = message;
     document.getElementById("story").innerHTML = response.story;
     document.getElementById("question").innerHTML = response.question;
 
