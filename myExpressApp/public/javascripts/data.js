@@ -39,10 +39,24 @@ shortBow = {
 
 wolf = {
     "description":"This common wolf is not terribly aggressive or strong by itslef, but is formidable in a pack.",
+    "alive":1,
     "health":20,
     "armor":1,
     "agility":20,
     "strength":20,
     "endurance":10,
     "attack":20,  // general attack ability
+    "story":"As you walk the road between your home and Kingsport, the sun sets and in the dim light of the dusk you notice a pair of yellow eyes peering out from the dark trees on your right.<br><br> A wolf is following you!"
+}
+
+bandit = {
+    "description":"This common bandit is vicious but not to smart.",
+    "alive":1,
+    "health":40,
+    "armor":5,
+    "agility":5,
+    "strength":25,
+    "endurance":10,
+    "attack":20,  // general attack ability
+    "story":"A bandit jumps out from behind a tree and demands you give him everything you own"
 }

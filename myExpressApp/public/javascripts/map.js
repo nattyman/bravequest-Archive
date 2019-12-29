@@ -32,11 +32,15 @@ var map = {
                 },
                 2:{
                     "id":10202,
-                    "name": "Forest2"
+                    "name": "Forest2",
                 },
                 3:{
                     "id":10203,
-                    "name": "Mountains2"
+                    "name": "Mountains2",
+                    "npc":"monster",
+                    "type":"bandit",
+                    "count":0,
+
                 }
             }
         },

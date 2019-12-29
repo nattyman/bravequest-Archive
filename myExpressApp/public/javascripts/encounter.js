@@ -61,8 +61,9 @@ function action(newCommand){
 }
 
 function encounterMonster(type){
+    // This needs logic to determine if the monster is alive, and then it needs to be made generic based on the location pulling from the data file.
     console.log("You are encountering a " + type);
-    response.story = "As you walk the road between your home and Kingsport, the sun sets and in the dim light of the dusk you notice a pair of yellow eyes peering out from the dark trees on your right.<br><br> A wolf is following you!";
+    response.story = this[type].story;
     response.question = "Will you (r)un or (a)ttack?";
     state.mode = "encounter";
 }
@@ -83,7 +84,8 @@ function encounter(){
 
 function battle(_opponent, _weapon){
     // Instantiate a new opponent off of the object template
-    let thisOp = Object.create(this[_opponent]);
+    // let thisOp = Object.create(this[_opponent]);
+    let thisOp = this[_opponent]; // Instead of insatniating, we will leave that wolf static for this spot on the map.
     console.log("Your opponent is " + thisOp.description);
     thisOp.health -= 5;
     console.log("The wolf's health is " + wolf.health + "\nThis wolf's health is " + thisOp.health);
@@ -102,17 +104,17 @@ function battle(_opponent, _weapon){
         // My Attack
         let myLowRange = myStats.strength - 5;
         let myHighRange = myStats.strength +2;
-        let _myAttack = rollDice(myLowRange, myHighRange) + this[_weapon].attack;
+        let _myAttack = rollDice(myLowRange, myHighRange) + this[_weapon].attack - thisOp.armor;
             if (_myAttack < 1) {_myAttack = 1} // prevent negative attack and loops
         console.log("My attack = " +_myAttack);
-        let _opDamage = Math.round(_myAttack * (chance/100) - thisOp.armor);
+        let _opDamage = Math.round(_myAttack * (chance/100));
 
         // Opponents Attack
         let opLowRange = thisOp.strength -5;
         let opHighRange = thisOp.strength +2;
-        let _opAttack = rollDice(opLowRange, opHighRange) + thisOp.attack;
+        let _opAttack = rollDice(opLowRange, opHighRange) + thisOp.attack - myStats.armor;
             if (_opAttack < 1) {_opAttack = 1} // prevent negative attack and loops
-        let _myDamage = Math.round(_opAttack * (chance/100) - myStats.armor);
+        let _myDamage = Math.round(_opAttack * (chance/100));
 
         // Print results to screen
         response.story += "<br>You take " + _myDamage + " damage.  Your opponent takes " + _opDamage + " damage<br>";
@@ -132,7 +134,8 @@ function battle(_opponent, _weapon){
             restartGame();
         } 
         else if (thisOp.health <= 0) {
-            response.story += "Success!  You have slain the " + _opponent;
+            response.story += "<p>Success! You have slain the " + _opponent;
+            this[_opponent].alive = 0;
         }
     state.mode = "battle";
 }
