@@ -38,6 +38,15 @@ shortBow = {
 
 //NPC's
 
+// Interaction Options
+options = [
+    "(t)alk",
+    "(h)ide",
+    "(a)ttack",
+    "(r)un",
+    "(i)gnore",
+]
+
 wolf = {
     "description":"This common wolf is not terribly aggressive or strong by itslef, but is formidable in a pack.",
     "alive":1,
@@ -48,7 +57,8 @@ wolf = {
     "endurance":10,
     "attack":20,  // general attack ability
     "story":"As you walk the road between your home and Kingsport, the sun sets and in the dim light of the dusk you notice a pair of yellow eyes peering out from the dark trees on your right.<br><br> A wolf is following you!",
-
+    "question":"Will you (i)gnore and keep going, (r)un, or (a)ttack?",
+    "optionPairs": {"i":"ignore","r":"run","a":"attack"}, // to be used to normalize
 }
 
 bandit = {

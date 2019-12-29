@@ -3,9 +3,16 @@ var message = " ";
 var story = "";
 var alert = "";
 
-
 function printLocation() {
     console.log("x:" + myCoordinates.x + " y:" + myCoordinates.y);
+}
+
+function showStats(character){
+    Object.keys(this[character]).forEach(key => {
+        let value = this[character][key];
+    
+         console.log(`${key}: ${value}`);
+    });
 }
 
 // use the dollar sign as document.getElementByID
@@ -17,6 +24,7 @@ function rollDice(low, high) {
     return diceRoll;
   }
 
+
 function sleep(milliseconds) {
     const date = Date.now();
     let currentDate = null;
@@ -26,7 +34,7 @@ function sleep(milliseconds) {
 }
 
 function restartGame() {
-    $("question").innerHTML = "You're Dead.  Game over, man! Game over!"
+    $("question").innerHTML = "You're Dead.  Game over, man! Game over!";
     $("form").innerHTML = "<a href='/'>Restart game?</a>";
 }
 
@@ -38,6 +46,8 @@ function runGame() {
     //- Print story intro onto screen with the question
     $("story").innerHTML = intro;
     $("question").innerHTML = question;
+
+    showStats("myStats");
     
     // Get starting location and log to console.
     myMap = map;

@@ -10,30 +10,37 @@ var response = {"story":"No Story","Question":"No question"};
 // *need to check inventory for weopons before using
 // *Maybe the game skeleton needs to be generic and simple, but individual monsters will have their own functions to make the game play more unique.  That will be harder to maintain in the future though.  Maybe once I see a pattern in the monster encounters I can start combining elements.
 
+// Chooses the type of encounter based on the scenario
 function encounter(){
     let myType = myMap.x[myX].y[myY].encounter.type;
     let myNPC = myMap.x[myX].y[myY].encounter.npc;
     
-    switch(myType) {
-        case "monster":
-            console.log("Encountering type Monster");
-            encounterMonster(myNPC);
-            break;
-        default:
-            alert = "No encounter in map.js"
+    // Check to see if the NPC is still alive before encountering it.
+    if (this[myNPC].alive) {
+        switch(myType) {
+            case "monster":
+                console.log("Encountering type Monster");
+                    // Only encounter the monster if it is still alive
+                    encounterMonster(myNPC);
+                break;
+            default:
+                alert = "No encounter in map.js"
+        }
+    } else {
+        console.log("This npc is already dead.");
+        state.mode = "map";
     }
 }
 
+// Monster and other beast encounters
 function encounterMonster(npc){
-    // This needs logic to determine if the monster is alive, and then it needs to be made generic based on the location pulling from the data file.
     console.log("You are encountering a " + npc);
-    response.story = this[npc].story;
-    response.question = "Will you (r)un or (a)ttack?";
-    state.mode = "encounter";
-}
+    response.story = this[npc].story; // print the monster story
+    response.question = "What would you like to do (i)gnore, (r)un, (h)ide, or (a)ttack?"; // ask the monster question
+    state.mode = "encounter"; // lock the game mode state to encounter
+    }
 
 function action(newCommand){
-    console.log("Ready to action = " + newCommand);
     switch(newCommand) {
         case "attack":
         case "a":
