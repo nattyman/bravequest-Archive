@@ -5,11 +5,10 @@ var response = {"story":"No Story","Question":"No question"};
 
 
 // TO DO
-// *Create random number generator between 1 and 100
+// *Create random number generator between 1 and 100 - DONE
 // *Create monster char stats
 // *Create main char stats
 // *Add random-ness to encounters
-
 
 function action(newCommand){
     console.log("Ready to action = " + newCommand);
@@ -41,7 +40,23 @@ function action(newCommand){
         case "b":
         case "arrow":
         case "bow and arrow":
+            response.story = "You take your bow and notch an arrow, you slowly pull back the string, aim right between to 2 yellow eyes, take a deep breath in, then out, pause and release the arrow...<br><br>";
+            switch(true) {
+                case chance > 1:
+                    response.story += "The arrow glances off the wolf's scalp, enraging the beast.  He lunges toward you, barely giving you time to pull your dagger before he pounces on you.  The two of you toll around on the ground, your knife flashing, all you see is a teeth and claws and blood everywhere."
+                    let outcome = battle("wolf","shortBow");
+                    break;
+                case chance < 35:
+                    response.story += "The arrow sinks into the left eye and the beast falls.  You go to investigate, but find nothing. The short bow was only strong enough to scare it away, not bring it down.";
+                    response.question = "Which way do you want to go? North to Kingsport?";
+                    break;
+                case chance > 35:
+                    response.story += "The arrow sinks into the left eye and the beast falls.  You go to investigate and find the beast dead in a pool of it's own blood. The pelt should be worth some money.<br><br>Add a wolfpelt to your inventory.";
+                    inventory.wolfpelt += 1;
+                    break;
+            }
             break;
+
     }
 }
 
@@ -64,4 +79,46 @@ function encounter(){
         default:
             alert = "No encounter in map.js"
     }
+}
+
+function battle(_opponent, _weapon){
+    // Instantiate a new opponent off of the object template
+    let thisOp = Object.create(this[_opponent]);
+    console.log("Your opponent is " + thisOp.description);
+    thisOp.health -= 5;
+    console.log("The wolf's health is " + wolf.health + "\nThis wolf's health is " + thisOp.health);
+
+    // Clear the story
+    response.story = '';
+
+    // My Attack
+    let myLowRange = myStats.strength - 5;
+    let myHighRange = myStats.strength +2;
+    let _myAttack = rollDice(myLowRange, myHighRange) + this[_weapon].attack;
+    console.log("My attack = " +_myAttack);
+    let _opDamage = Math.round(_myAttack * (chance/100) - thisOp.armor);
+
+    // Opponents Attack
+    let opLowRange = thisOp.strength -5;
+    let opHighRange = thisOp.strength +2;
+    let _opAttack = rollDice(opLowRange, opHighRange) + thisOp.attack;
+    let _myDamage = Math.round(_opAttack * (chance/100) - myStats.armor);
+
+
+    response.story += "You take " + _myDamage + " damage.  Your opponent takes " + _opDamage + " damage<br>";
+    $("story").innerHTML = story;
+    console.log(story);
+
+    myStats.health -= _myDamage;
+    thisOp.health -= _opDamage; 
+    console.log("Your health is " + myStats.health);
+    console.log("Your opponents health is " + thisOp.health);
+
+    if (myStats.health <= 0) {
+        response.story = "You're dead. Game over!";
+    } 
+    else if (thisOp.health <= 0) {
+        response.story = "Success!  You have slain the " + _opponent;
+    }
+
 }

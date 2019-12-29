@@ -1,19 +1,23 @@
 var chance = "";
+var story = "";
 
 function printLocation() {
     console.log("x:" + myCoordinates.x + " y:" + myCoordinates.y);
 }
 
+// use the dollar sign as document.getElementByID
+function $(x) {return document.getElementById(x);}
+
 function rollDice(low, high) {
-    let diceRoll = Math.random() * (high - low) + low;
+    let diceRoll = Math.round(Math.random() * (high - low) + low);
     console.log("Dice roll = " + diceRoll);
     return diceRoll;
   }
 
 function runGame() {
     //- Print location
-    document.getElementById("story").innerHTML = intro;
-    document.getElementById("question").innerHTML = question;
+    $("story").innerHTML = intro;
+    $("question").innerHTML = question;
     
     printLocation();
     var alert = "";
