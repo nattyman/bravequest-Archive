@@ -1,4 +1,5 @@
 var chance = "";
+var message = [];
 var story = "";
 
 function printLocation() {
@@ -13,6 +14,23 @@ function rollDice(low, high) {
     console.log("Dice roll = " + diceRoll);
     return diceRoll;
   }
+
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+}
+
+function restartGame() {
+    $("question").innerHTML = "You're Dead.  Game over, man! Game over!"
+    $("form").innerHTML = "<a href='/'>Restart game?</a>";
+}
+
+function print(id,message) {
+    $("message").innerHTML += message;
+}
 
 function runGame() {
     //- Print location
@@ -48,6 +66,12 @@ function enterCommand() {
         case "encounter":
             action(newCommand);
             break;
+        case "battle":
+            battleChoice(newCommand);
+            break;
+        case "dead":
+            alert = "You are dead!";
+            break;
         default:
             alert = "Error: No game state is available."
             break;
@@ -57,6 +81,7 @@ function enterCommand() {
         newCommand += "<br><span style='color:red; font:bold'>" + alert + "</span>";
     }
     console.log(alert);
+    // Clear the input and set the placeholder
     document.getElementById("command").value = "";
     document.getElementById("command").placeholder = "Now what?"
 
@@ -64,5 +89,6 @@ function enterCommand() {
     document.getElementById("story").innerHTML = response.story;
     document.getElementById("question").innerHTML = response.question;
 
+    // message.forEach(print("message",message))
 }
 

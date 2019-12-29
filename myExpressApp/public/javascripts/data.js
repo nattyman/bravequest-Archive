@@ -1,6 +1,8 @@
 var state = {
     // mode could be map or encounter, this locks the game play into the needed context
-    "mode":"map", 
+    "mode":"map", // encounter, battle
+    "currentWeapon":"",
+    "currentOpponent":"", // put the instance of the opponent here to save the game state.
 };
 
 var myStats = {

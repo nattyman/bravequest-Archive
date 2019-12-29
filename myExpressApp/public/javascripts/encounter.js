@@ -43,8 +43,8 @@ function action(newCommand){
             response.story = "You take your bow and notch an arrow, you slowly pull back the string, aim right between to 2 yellow eyes, take a deep breath in, then out, pause and release the arrow...<br><br>";
             switch(true) {
                 case chance > 1:
-                    response.story += "The arrow glances off the wolf's scalp, enraging the beast.  He lunges toward you, barely giving you time to pull your dagger before he pounces on you.  The two of you toll around on the ground, your knife flashing, all you see is a teeth and claws and blood everywhere."
-                    let outcome = battle("wolf","shortBow");
+                    response.story += "The arrow glances off the wolf's scalp, enraging the beast.  He lunges toward you, barely giving you time to pull your dagger before he pounces on you.  The two of you roll around on the ground, your knife flashing, all you see is a teeth and claws and blood everywhere.<br>"
+                    let outcome = battle("wolf","knife");
                     break;
                 case chance < 35:
                     response.story += "The arrow sinks into the left eye and the beast falls.  You go to investigate, but find nothing. The short bow was only strong enough to scare it away, not bring it down.";
@@ -88,37 +88,63 @@ function battle(_opponent, _weapon){
     thisOp.health -= 5;
     console.log("The wolf's health is " + wolf.health + "\nThis wolf's health is " + thisOp.health);
 
+    // Set the current weapon and opponent
+    state.currentOpponent = _opponent;
+    state.currentWeapon = _weapon;
+
     // Clear the story
-    response.story = '';
+    // response.story = '';
+    
+    // Removed loop b/c Javascript won't update the screen.  Will have to keep it turn based 
+    // // Battle loop
+    // let bothAlive = 1;
+    // while(bothAlive) {
+        // My Attack
+        let myLowRange = myStats.strength - 5;
+        let myHighRange = myStats.strength +2;
+        let _myAttack = rollDice(myLowRange, myHighRange) + this[_weapon].attack;
+            if (_myAttack < 1) {_myAttack = 1} // prevent negative attack and loops
+        console.log("My attack = " +_myAttack);
+        let _opDamage = Math.round(_myAttack * (chance/100) - thisOp.armor);
 
-    // My Attack
-    let myLowRange = myStats.strength - 5;
-    let myHighRange = myStats.strength +2;
-    let _myAttack = rollDice(myLowRange, myHighRange) + this[_weapon].attack;
-    console.log("My attack = " +_myAttack);
-    let _opDamage = Math.round(_myAttack * (chance/100) - thisOp.armor);
+        // Opponents Attack
+        let opLowRange = thisOp.strength -5;
+        let opHighRange = thisOp.strength +2;
+        let _opAttack = rollDice(opLowRange, opHighRange) + thisOp.attack;
+            if (_opAttack < 1) {_opAttack = 1} // prevent negative attack and loops
+        let _myDamage = Math.round(_opAttack * (chance/100) - myStats.armor);
 
-    // Opponents Attack
-    let opLowRange = thisOp.strength -5;
-    let opHighRange = thisOp.strength +2;
-    let _opAttack = rollDice(opLowRange, opHighRange) + thisOp.attack;
-    let _myDamage = Math.round(_opAttack * (chance/100) - myStats.armor);
+        // Print results to screen
+        response.story += "<br>You take " + _myDamage + " damage.  Your opponent takes " + _opDamage + " damage<br>";
+        response.question = "Will you continue to (f)ight or try to (r)un away?"
+        // document.getElementById("story").innerHTML += thisStory;
+        // print(thisStory);
+        console.log(response.story);
 
+        myStats.health -= _myDamage;
+        thisOp.health -= _opDamage; 
+        console.log("Your health is " + myStats.health);
+        console.log("Your opponents health is " + thisOp.health);
 
-    response.story += "You take " + _myDamage + " damage.  Your opponent takes " + _opDamage + " damage<br>";
-    $("story").innerHTML = story;
-    console.log(story);
+        if (myStats.health <= 0) {
+            response.story += "You're dead. Game over!";
+            state.mode = "dead";
+            restartGame();
+        } 
+        else if (thisOp.health <= 0) {
+            response.story += "Success!  You have slain the " + _opponent;
+        }
+    state.mode = "battle";
+}
 
-    myStats.health -= _myDamage;
-    thisOp.health -= _opDamage; 
-    console.log("Your health is " + myStats.health);
-    console.log("Your opponents health is " + thisOp.health);
-
-    if (myStats.health <= 0) {
-        response.story = "You're dead. Game over!";
-    } 
-    else if (thisOp.health <= 0) {
-        response.story = "Success!  You have slain the " + _opponent;
+function battleChoice(command) {
+    if (command == "fight" || command == "f") {
+        battle(state.currentOpponent, state.currentWeapon);
+        // need to pass opponent and weapon, probably from embededed HTML fields?
     }
-
+    else if (command == "run" || command == "r") {
+        // Need to take damage from re-treating, probably subtract a full attack from the enemy.
+    
+        state.mode = "map";
+    }
 }

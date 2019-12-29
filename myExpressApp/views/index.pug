@@ -13,14 +13,15 @@ block content
   //- p Welcome to #{title}
   //- script document.write(intro);
   //- script document.write(link);
+  div(id="message")
   div(id="story") 
   p(id="question")
   //- p(id="locationMessage") My location is currently 
   //-   span(id="myCoordinates ") 
-  form(onSubmit="return enterCommand()" method="post")
-    div.form-group
-    //- label(for='action') Action:
-    input#command.form-control(type='text', placeholder='Where will you go?' name='action' autofocus autocomplete="off")
+  div.form-group#form
+    form(onSubmit="return enterCommand()" method="post")
+      //- label(for='action') Action:
+      input#command.form-control(type='text', placeholder='Where will you go?' name='action' autofocus autocomplete="off")
 
     //- script document.getElementById("story").innerHTML = intro1.story;
   //- script var newCommand = document.getElementByID("command").onsubmit = funciton {enterCommand()}
