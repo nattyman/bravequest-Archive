@@ -80,6 +80,9 @@ function enterCommand() {
         case "encounter":
             action(newCommand);
             break;
+        case "attack":
+            attack(newCommand);
+            break;
         case "battle":
             battleChoice(newCommand);
             break;

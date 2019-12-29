@@ -24,7 +24,15 @@ var inventory = {
     "wolfpelt":0,
 }
 
-// weapons
+// Key of weapons.  You will only be able to carry one of each weapon type, or least have it battle ready.
+var weaponsList = {
+    "knife":"k",
+    "short bow":"b",
+    "short sword":"s",
+    "battle axe":"a",
+}
+
+// weapons 
 knife = {
     "attack":5,
     "block":3,
@@ -39,7 +47,7 @@ shortBow = {
 //NPC's
 
 // Interaction Options
-options = [
+var options = [
     "(t)alk",
     "(h)ide",
     "(a)ttack",
@@ -47,7 +55,7 @@ options = [
     "(i)gnore",
 ]
 
-wolf = {
+var wolf = {
     "description":"This common wolf is not terribly aggressive or strong by itslef, but is formidable in a pack.",
     "alive":1,
     "health":20,
@@ -61,7 +69,7 @@ wolf = {
     "optionPairs": {"i":"ignore","r":"run","a":"attack"}, // to be used to normalize
 }
 
-bandit = {
+var bandit = {
     "description":"This common bandit is vicious but not to smart.",
     "alive":1,
     "health":40,
