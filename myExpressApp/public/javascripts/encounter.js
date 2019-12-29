@@ -1,6 +1,3 @@
-// var message = "";
-// var question = "";
-// var [story, question] = ["No story", "No question"];
 var response = {"story":"No Story","Question":"No question"};
 
 
@@ -9,6 +6,31 @@ var response = {"story":"No Story","Question":"No question"};
 // *Create monster char stats - DONE
 // *Create main char stats - DONE
 // *Add random-ness to encounters - DONE
+// *Make the action function dymanmic based on data.js, 
+// *need to check inventory for weopons before using
+// *Maybe the game skeleton needs to be generic and simple, but individual monsters will have their own functions to make the game play more unique.  That will be harder to maintain in the future though.  Maybe once I see a pattern in the monster encounters I can start combining elements.
+
+function encounter(){
+    let myType = myMap.x[myX].y[myY].encounter.type;
+    let myNPC = myMap.x[myX].y[myY].encounter.npc;
+    
+    switch(myType) {
+        case "monster":
+            console.log("Encountering type Monster");
+            encounterMonster(myNPC);
+            break;
+        default:
+            alert = "No encounter in map.js"
+    }
+}
+
+function encounterMonster(npc){
+    // This needs logic to determine if the monster is alive, and then it needs to be made generic based on the location pulling from the data file.
+    console.log("You are encountering a " + npc);
+    response.story = this[npc].story;
+    response.question = "Will you (r)un or (a)ttack?";
+    state.mode = "encounter";
+}
 
 function action(newCommand){
     console.log("Ready to action = " + newCommand);
@@ -28,11 +50,11 @@ function action(newCommand){
             response.story = "A bold move!  Someone likes to get their hands dirty.  You slowly pull your knife out of it's sheath at your side and creep toward the yellow eyes staring out of the wood.<br><br>";
             switch(true) {
                 case 50 < chance:
-                    response.story += "Suddenly, without warning, another creature that is all fure and teeth and claws slams into you from the side. The eyes in front pounces on you along with half a dozen other fierce wolves.  You barely realize what is happening before they tear you to pieces.";
+                    response.story += "Suddenly, without warning, another creature that is all fur and teeth and claws slams into you from the side. The eyes in front pounces on you along with half a dozen other fierce wolves.  You barely realize what is happening before they tear you to pieces.";
                     response.question = "Rest In Peace";
                     break;
                 case 50 > chance:
-                    response.story += "The wolf lunges forward as you bury the knife in it's chest. Well done!";
+                    response.story += "The wolf lunges forward as you bury the knife in it's chest. You got lucky on that one!";
                     break;
             }
             break;
@@ -60,35 +82,12 @@ function action(newCommand){
     }
 }
 
-function encounterMonster(type){
-    // This needs logic to determine if the monster is alive, and then it needs to be made generic based on the location pulling from the data file.
-    console.log("You are encountering a " + type);
-    response.story = this[type].story;
-    response.question = "Will you (r)un or (a)ttack?";
-    state.mode = "encounter";
-}
-
-function encounter(){
-    let myNPC = myMap.x[myX].y[myY].npc;
-    let myNPCType = myMap.x[myX].y[myY].type;
-    
-    switch(myNPC) {
-        case "monster":
-            encounterMonster(myNPCType);
-            console.log("Monster chosen");
-            break;
-        default:
-            alert = "No encounter in map.js"
-    }
-}
-
 function battle(_opponent, _weapon){
+    state.mode = "battle";
     // Instantiate a new opponent off of the object template
     // let thisOp = Object.create(this[_opponent]);
     let thisOp = this[_opponent]; // Instead of insatniating, we will leave that wolf static for this spot on the map.
     console.log("Your opponent is " + thisOp.description);
-    thisOp.health -= 5;
-    console.log("The wolf's health is " + wolf.health + "\nThis wolf's health is " + thisOp.health);
 
     // Set the current weapon and opponent
     state.currentOpponent = _opponent;
@@ -135,9 +134,10 @@ function battle(_opponent, _weapon){
         } 
         else if (thisOp.health <= 0) {
             response.story += "<p>Success! You have slain the " + _opponent;
+            response.question = "Where will you go?"
             this[_opponent].alive = 0;
+            state.mode = "map";
         }
-    state.mode = "battle";
 }
 
 function battleChoice(command) {
@@ -147,7 +147,7 @@ function battleChoice(command) {
     else if (command == "run" || command == "r") {
         // Need to take damage from re-treating, probably subtract a full attack from the enemy.
         myStats.health - this[state.currentWeapon].attack;
-        response.story = "You barely manage to get away, but you lost " + this[state.currentWeapon].attack + " health, leaving you with only " + myStats.health + " health.";
+        response.story = "You barely manage to get away, but you lost " + this[state.currentWeapon].attack + " more health, leaving you with only " + myStats.health + " health. At least you are alive!";
         response.question = "Where do you want to go now?"
         state.mode = "map";
     }

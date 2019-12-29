@@ -7,6 +7,7 @@ var state = {
 
 var myStats = {
     "health":100,
+    "skillLevel":1,
     "armor":5,
     "agility":10,
     "strength":10,
@@ -46,7 +47,8 @@ wolf = {
     "strength":20,
     "endurance":10,
     "attack":20,  // general attack ability
-    "story":"As you walk the road between your home and Kingsport, the sun sets and in the dim light of the dusk you notice a pair of yellow eyes peering out from the dark trees on your right.<br><br> A wolf is following you!"
+    "story":"As you walk the road between your home and Kingsport, the sun sets and in the dim light of the dusk you notice a pair of yellow eyes peering out from the dark trees on your right.<br><br> A wolf is following you!",
+
 }
 
 bandit = {

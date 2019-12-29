@@ -21,26 +21,7 @@ block content
   div.form-group#form
     form(onSubmit="return enterCommand()" method="post")
       //- label(for='action') Action:
-      input#command.form-control(type='text', placeholder='Where will you go?' name='action' autofocus autocomplete="off")
+      input#command.form-control(type='text', placeholder='>>' name='action' autofocus autocomplete="off")
 
-    //- script document.getElementById("story").innerHTML = intro1.story;
-  //- script var newCommand = document.getElementByID("command").onsubmit = funciton {enterCommand()}
   script runGame();
 
-    //- Test JSON retrieval
-    //- var myMap = JSON.parse(map);
-
-      //- Print the command on the page for debuging
-      document.getElementById("story").innerHTML = newCommand; 
-      //- Reset alert to nothing
-      alert = "";
-      }
-
-
-//- <script>
-//- document.getElementById("myForm").onsubmit = function() {myFunction()};
-
-//- function myFunction() {
-//-   alert("The form was submitted");
-//- }
-//- </script>

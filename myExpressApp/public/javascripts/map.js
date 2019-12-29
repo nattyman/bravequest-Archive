@@ -14,9 +14,11 @@ var map = {
                 2:{
                     "id":10102,
                     "name": "Road between Kingsport and the farm",
-                    "npc":"monster",
-                    "type":"wolf",
-                    "count":0,
+                    "encounter": {
+                        "type":"monster",
+                        "npc":"wolf",
+                        "count":0,
+                    }
                 },
                 3:{
                     "id":10103,
@@ -37,10 +39,11 @@ var map = {
                 3:{
                     "id":10203,
                     "name": "Mountains2",
-                    "npc":"monster",
-                    "type":"bandit",
-                    "count":0,
-
+                    "encounter": {
+                        "type":"monster",
+                        "npc":"bandit",
+                        "count":0,
+                    }
                 }
             }
         },

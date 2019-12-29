@@ -1,6 +1,8 @@
 var chance = "";
 var message = " ";
 var story = "";
+var alert = "";
+
 
 function printLocation() {
     console.log("x:" + myCoordinates.x + " y:" + myCoordinates.y);
@@ -33,33 +35,35 @@ function print(id,message) {
 }
 
 function runGame() {
-    //- Print location
+    //- Print story intro onto screen with the question
     $("story").innerHTML = intro;
     $("question").innerHTML = question;
     
-    printLocation();
-    var alert = "";
+    // Get starting location and log to console.
     myMap = map;
     console.log(myMap.x[1].y[1].name);
 }
-//- function to receive input and print it on the page
+
+//- function to receive input and determine next action
 function enterCommand() {
+    
     //- Prevent the form from reloading the page 
     event.preventDefault();
 
-    //Get a random number between 1 and 100
+    //Get a random number between 1 and 100 to use as chance throughout the turn
     chance = rollDice(1,100);
 
     //- Recieve the input into "newCommand"
     let newCommand = document.getElementById("command").value;
-    newCommand = newCommand.toLowerCase();
-    //- Clear the alert message
+    newCommand = newCommand.toLowerCase(); // convert to lowercase for easy matching
+
+    //- Clear the alert message incase it already has something assigned to it.
     alert = "";
     // React based on the game state mode
     switch (state.mode) {
         case "map":
-            move(newCommand);
-            setLocation();
+            move(newCommand); // Change my coordinates
+            setLocation(); // match new coordinates with map and get map location scenario for encounter
             //   Encounter
             encounter();
             break;
@@ -83,7 +87,7 @@ function enterCommand() {
     console.log(alert);
     // Clear the input and set the placeholder
     document.getElementById("command").value = "";
-    document.getElementById("command").placeholder = "Now what?"
+    document.getElementById("command").placeholder = ">>"
 
     // Print the new story message and question on the page
     $("message").innerHTML = message;
